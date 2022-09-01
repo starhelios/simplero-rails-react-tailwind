@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     put 'groups/:uuid', to: 'groups#update'
     delete 'groups/:uuid', to: 'groups#destroy'
 
+    get 'posts/:id', to: 'posts#show'
+    post 'posts', to: 'posts#create'
+    put 'posts/:id', to: 'posts#update'
+    delete 'posts/:id', to: 'posts#destroy'
+
     get '/users', to: 'users#index'
   end
 
