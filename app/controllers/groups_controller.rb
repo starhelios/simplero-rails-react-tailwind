@@ -1,11 +1,11 @@
-class Api::GroupsController < ApplicationController
+class GroupsController < ApplicationController
     before_action :set_group, only: [:show, :update, :destroy]
 
     def index
 
         user = current_user
         
-        groups = Group.left_outer_joins(:users)
+        groups = Group
 
         type = params[:type]
         if type == 'owner'
@@ -13,7 +13,6 @@ class Api::GroupsController < ApplicationController
         elsif type == 'member'
             groups = user.groups
         end
-
         @groups = groups.where.not(access_level: 'secret').paginate(page: params[:page], per_page: 15)
     end
 
