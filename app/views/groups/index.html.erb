@@ -1,13 +1,13 @@
 <div class='container mx-auto mt-6 pt-6'>
   <% if flash[:errors] %>
-    <%= render 'shared/errors', errors: flash[:errors], model: 'Group' %>
+    <%= render 'shared/errors', errors: flash[:errors] %>
   <% end %>
   <h1 class='text-3xl mb-8'>Groups</h1>
   <div class='flex justify-between'>
-    <%= render(Tabs::SimpleTabsComponent.new(tabs: ["All Groups", "Created by me", "Where I am member"], active_tab: 0, on_change: nil))%>
+    <%= render(Tabs::SimpleTabsComponent.new(tabs: ["All Groups", "Created by me", "Where I am member"], keys: ['all', 'owner', 'member'], active_key: params[:type] || 'all', on_change: groups_path))%>
     <div data-controller="modal">
       <%= render(Buttons::PrimaryButtonComponent.new(title: "Create a new group", action: "click->modal#toggle")) %>
-      <%= render(Modals::GroupModalComponent.new(edit: false, group: nil, hanlde_submit: nil, on_hide: "click->modal#toggle"))%>
+      <%= render(Modals::GroupModalComponent.new(edit: false, group: Group.new, hanlde_submit: nil, on_hide: "click->modal#toggle"))%>
     </div>
   </div>
   <% @groups.each do |group|%>

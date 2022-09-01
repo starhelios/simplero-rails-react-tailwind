@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Tabs::SimpleTabsComponent < ViewComponent::Base
-  def initialize(tabs:, active_tab:, on_change:)
+  def initialize(tabs:, active_key:, on_change:, keys: [])
     @tabs = tabs
-    @active_tab = active_tab
+    @active_key = active_key
     @on_change = on_change
+    @keys = keys
   end
 
 end

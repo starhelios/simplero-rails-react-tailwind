@@ -7,9 +7,6 @@ class GroupsController < ApplicationController
     end
 
     def index
-        
-        # binding.pry
-        # @group = Group.new
         user = current_user
         groups = Group
         type = params[:type]
@@ -24,6 +21,10 @@ class GroupsController < ApplicationController
 
     def show
         @is_admin = current_user.id == @group.owner_id
+        @is_member = @is_admin || GroupMember.find_by(user_id: current_user.id, group_id: @group.id) ? true : false
+        if !@is_member
+            redirect_to groups_path, flash:{errors: ['You need to join the group'], title: 'Access Denied'}
+        end
     end
 
     def create
@@ -31,6 +32,7 @@ class GroupsController < ApplicationController
         @group.owner_id = current_user.id
         @group.uuid = SecureRandom.uuid
         if @group.save
+            GroupMember.create(group_id: @group.id, user_id: current_user.id, joining_date: DateTime.now)
             redirect_to groups_path
         else
             redirect_back fallback_location: groups_path, flash:{errors: @group.errors.full_messages}
@@ -38,11 +40,15 @@ class GroupsController < ApplicationController
     end
 
     def update
-        if @group.update(group_params)
-            render 'api/groups/show'
-        else
+        errors = []
+        
+        
+        @group = Group.find(params[:id])
+        if !@group.update(group_params)
+            errors =  @group.errors.full_messages
             render json: { status: false, message: 'Unable to update group', errors: @group.errors.full_messages }
         end
+        redirect_back fallback_location: group_path(uuid: @group.uuid), flash:{errors: errors}
     end
 
     def destroy
@@ -85,7 +91,7 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-        params.permit(:name, :access_level)
+        params.require(:group).permit(:name, :access_level)
     end
 
     def to_boolean(str)

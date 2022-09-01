@@ -1,6 +1,9 @@
 <div class='container mx-auto mt-6'>
   <div class='inline-block w-2/3 align-top'>
-    <h1 class='text-3xl mb-8'><%= @group.name %> <i class="fa-solid fa-gear ml-5"></i></h1>
+    <div data-controller="modal">
+      <h1 class='text-3xl mb-8'><%= @group.name %> <% if @is_admin %> <i class="fa-solid fa-gear ml-5" data-action="click->modal#toggle"><% end %></i></h1>
+      <%= render(Modals::GroupModalComponent.new(edit: true, group: @group, hanlde_submit: nil, on_hide: "click->modal#toggle")) if @is_admin %>
+    </div>
     <h1 class='text-3xl mb-8'>All Posts </h1>
     <div class='mb-8'>
       <h2 class='text-xl mb-8'>I went to a supermarket</h2>
@@ -52,8 +55,7 @@
             <% @group.group_members.each do |member|%>
               <div class="flex justify-between mb-4">
                 <p><%= member.user.name %></p>
-                <%= button_to "<i class='fa-solid fa-xmark fa-2x text-danger'></i>".html_safe, 
-                      remove_member_path(membership_id: member.id, status: false), :title=> "Remove" if @is_admin %>
+                <%= render(Buttons::IconButtonComponent.new(title: "Remove", icon: "fa-solid fa-xmark fa-2x text-danger", action_url: remove_member_path(membership_id: member.id, status: false))) if @is_admin && member.user.id != @group.owner_id %>
               </div>
             <% end %>
           </div>
@@ -66,10 +68,8 @@
             <% @group.joining_requests.each do |request|%>
               <div class="flex justify-between mb-4">
                 <p class="text-lg w-36"><%= request.user.name %></p>
-                <%= button_to "<i class='fa-solid fa-check fa-2x text-success'></i>".html_safe,  
-                    update_request_path(request_id: request.id, status: true),  :title=> "Approve" %>
-                <%= button_to "<i class='fa-solid fa-xmark fa-2x text-danger'></i>".html_safe, 
-                    update_request_path(request_id: request.id, status: false), :title=> "Reject" %>
+                <%= render(Buttons::IconButtonComponent.new(title: "Approve", icon: "fa-solid fa-check fa-2x text-success", action_url: update_request_path(request_id: request.id, status: true))) %>
+                <%= render(Buttons::IconButtonComponent.new(title: "Reject", icon: "fa-solid fa-xmark fa-2x text-danger", action_url: update_request_path(request_id: request.id, status: false))) %>
               </div>
             <% end %>
           </div>

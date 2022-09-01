@@ -4,7 +4,7 @@ class Group < ApplicationRecord
     validates :access_level, inclusion: { in: ["public", "private", "secret"]}
     validates :owner_id, presence: true
 
-    has_many :group_members, class_name: "GroupMember"
+    has_many :group_members, class_name: "GroupMember", dependent: :destroy
     has_many :users, through: :group_members
     has_many :joining_requests, -> { where status: "pending"}
 
