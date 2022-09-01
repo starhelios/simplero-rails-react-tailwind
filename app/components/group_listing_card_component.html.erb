@@ -10,9 +10,13 @@
       <span><%= @group.posts.count %> posts</span>
       <span class='mx-3'>|</span>
       <span>Last Activity <%= pluralize(1+rand(5), 'day')%> ago</span>
+      <% if @current_user.id == @group.owner_id %>
+        <span class='mx-3'>|</span>
+        <%= button_to 'Delete', groups_path(uuid: @group.uuid), method: :delete, :onclick => "return confirm('Are you sure you want to delete this group?')", form_class: "inline text-red-400" %>
+      <% end %>
     </div>
     <div>
-      <%= render(Buttons::OutlineButtonComponent.new(title: 'Join')) if @current_user.id != @group.owner_id%>
+      <%= render(Buttons::ActionButtonComponent.new(title: @btn_text, disabled: @is_member || @is_requested, action_url: join_group_path(group_id: @group.id, user_id: @current_user.id))) if @current_user.id != @group.owner_id%>
     </div>
   </div>
 </div>

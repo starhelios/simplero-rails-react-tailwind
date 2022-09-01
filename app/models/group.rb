@@ -6,6 +6,7 @@ class Group < ApplicationRecord
 
     has_many :group_member, class_name: "GroupMember"
     has_many :users, through: :group_member
+    has_many :joining_requests
 
     belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 

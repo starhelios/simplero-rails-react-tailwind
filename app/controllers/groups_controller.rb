@@ -7,6 +7,9 @@ class GroupsController < ApplicationController
     end
 
     def index
+        
+        # binding.pry
+        # @group = Group.new
         user = current_user
         groups = Group
         type = params[:type]
@@ -24,13 +27,12 @@ class GroupsController < ApplicationController
 
     def create
         @group = Group.new(group_params)
-
+        @group.owner_id = current_user.id
         @group.uuid = SecureRandom.uuid
-
         if @group.save
-            render 'api/groups/show'
+            redirect_to groups_path
         else
-            render json: { status: false, message: 'Unable to create group', errors: @group.errors.full_messages }
+            redirect_back fallback_location: groups_path, flash:{errors: @group.errors.full_messages}
         end
     end
 
@@ -44,17 +46,17 @@ class GroupsController < ApplicationController
 
     def destroy
         @group.destroy
-        render json: { status: true, message: 'Group Deleted!' }
+        redirect_back fallback_location: groups_path
     end
 
     def request_to_join
         group = Group.find(params[:group_id]);
         if(group.access_level == 'public')
-            GroupMember.new(group_id: params[:group_id], user_id: params[:user_id], joining_date: DateTime.now)
+            GroupMember.create(group_id: params[:group_id], user_id: params[:user_id], joining_date: DateTime.now)
         else
-            JoiningRequest.new(group_id: params[:group_id], user_id: params[:user_id], status: 'pending')
+            JoiningRequest.create(group_id: params[:group_id], user_id: params[:user_id], status: 'pending')
         end
-        render json: { status: true, message: 'Your request has been submitted!' }
+        redirect_back fallback_location: groups_path
     end
 
     def approve_or_reject_request
@@ -82,7 +84,7 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-        params.require(:group).permit(:name, :access_level, :owner_id)
+        params.permit(:name, :access_level)
     end
 
 end

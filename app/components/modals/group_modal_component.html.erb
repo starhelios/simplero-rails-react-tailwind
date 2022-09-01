@@ -1,0 +1,58 @@
+<div data-modal-target="wrapper" class='relative z-10 hidden' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
+  <div class='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'></div>
+  <div class='fixed z-10 inset-0 overflow-y-auto'>
+    <div class='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
+      <div class='relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-5xl sm:w-full'>
+        <div class='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
+          <div class='sm:flex sm:items-start'>
+            <div class='mt-3 sm:mt-0 sm:ml-4 w-full'>
+              <h3 class='mb-8 text-lg leading-6 font-medium text-gray-900' id='modal-title'>
+                <%= @edit == true ? 'Edit' : 'Create' %> Group
+              </h3>
+              <%= form_with(model: @group, class: "w-full", local: true,  data: { turbo: false}) do |f| %>
+                <div class='md:flex mb-6 items-start'>
+                  <div class='md:w-1/3'>
+                    <%= f.label :name, 'Group Name', class: "mb-8 block text-gray-500 font-bold mb-1 md:mb-0 pr-4" %>
+                    <div class='text-sm w-36 text-gray-400'>
+                      People will see this name before joining your group
+                    </div>
+                  </div>
+                  <div class='md:w-1/3'>
+                    <%= f.text_field :name, :required => true, class: "py-2 px-3 border border-gray-300 focus:border-brand-primary focus:outline-none focus:ring focus:ring-brand-primary focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full", placeholder: "Name of group" %>
+                  </div>
+                </div>
+                <div class='md:flex mb-6 items-start'>
+                  <div class='md:w-1/3 pr-4'>
+                    <%= f.label :access_level, 'Access Control', class: "mb-8 block text-gray-500 font-bold mb-1 md:mb-0 pr-4" %>
+                    <div class='text-sm w-36 text-gray-400'>
+                      Open means anyone can join. Private means you have to accept their
+                      request. Secret means you have to invite them to join.
+                    </div>
+                  </div>
+                  <div class='md:w-2/3 flex'>
+                    <div class="flex items-center mr-3">
+                      <%= f.radio_button :access_level, 'public', :checked => true, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+                      <%= f.label :access_level, 'Public', :value => 'public',  class: "pl-3 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+                    </div>
+                    <div class="flex items-center mr-3">
+                      <%= f.radio_button :access_level, 'private', class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+                      <%= f.label :access_level, 'Private', :value => 'private', class: "pl-3 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+                    </div>
+                    <div class="flex items-center mr-3">
+                      <%= f.radio_button :access_level, 'secret', class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+                      <%= f.label :access_level, 'Secret', :value => 'secret', class: "pl-3 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+                    </div>
+                  </div>
+                </div>
+                <div class='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
+                  <%= render(Buttons::PrimaryButtonComponent.new(title: @edit ? 'Edit' : 'Save', classes: "w-52 ml-5", type: "submit")) %>
+                  <%= render(Buttons::OutlineButtonComponent.new(title: 'Cancel', action: @on_hide)) %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
