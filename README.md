@@ -5,20 +5,30 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version
+  Make sure you have ruby-3.1.0 installed. Or use rvm to configure it.
 
-* System dependencies
+- Yarn version
+  1.22.19
 
-* Configuration
+- System dependencies
 
-* Database creation
+- Configuration
 
-* Database initialization
+- Database creation
+  copy .env.example to .env
+  update the DB connection variables.
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+- Deployment instructions
 
-* ...
+- Run Locally
+
+```
+bundle install
+yarn
+./bin/dev
+```
