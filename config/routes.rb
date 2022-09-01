@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     put 'posts/:id', to: 'posts#update'
     delete 'posts/:id', to: 'posts#destroy'
 
+    post 'comments', to: 'comments#create'
+    put 'comments/:id', to: 'comments#update'
+    delete 'comments/:id', to: 'comments#destroy'
+
     get '/users', to: 'users#index'
   end
 
