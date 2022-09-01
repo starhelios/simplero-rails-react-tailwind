@@ -1,17 +1,15 @@
 <div class='container mx-auto mt-6 pt-6'>
   <h1 class='text-3xl mb-8'>Groups</h1>
   <div class='flex justify-between'>
-    <%# <SimpleTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} /> %>
+    <%= render(Tabs::SimpleTabsComponent.new(tabs: ["All Groups", "Created by me", "Where I am member"], active_tab: 0, on_change: nil))%>
     <div>
-      <%# <PrimaryButton
-            rounded={false}
-            btnText='Create a New Group'
-            handleClick={() => setOpenModal(true)}
-          /> %>
+      <%= render(Buttons::PrimaryButtonComponent.new(title: "Create a new group")) %>
     </div>
   </div>
   <%# {openModal && (
         <CreateGroupModal setOpenModal={setOpenModal} handleSubmit={handleGroupCreation} />
       )} %>
-  <%= render(GroupListingCardComponent.new(group: nil))%>
+  <% @groups.each do |group|%>
+    <%= render(GroupListingCardComponent.new(group: group, current_user: @current_user))%>
+  <% end %>
 </div>

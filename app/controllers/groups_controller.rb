@@ -1,12 +1,14 @@
 class GroupsController < ApplicationController
     before_action :set_group, only: [:show, :update, :destroy]
+    before_action :authenticate_user!
+   
+    before_action do
+        @current_user = current_user
+    end
 
     def index
-
         user = current_user
-        
         groups = Group
-
         type = params[:type]
         if type == 'owner'
             groups = groups.where(owner_id: user.id)
@@ -14,6 +16,7 @@ class GroupsController < ApplicationController
             groups = user.groups
         end
         @groups = groups.where.not(access_level: 'secret').paginate(page: params[:page], per_page: 15)
+        
     end
 
     def show
