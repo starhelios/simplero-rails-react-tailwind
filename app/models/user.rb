@@ -8,7 +8,10 @@ class User < ApplicationRecord
 
     before_save {self.email = email.downcase}
 
-
+    has_many :groups_member, class_name: "GroupMember"
+    has_many :groups, through: :groups_member
+    
+    has_many :groups_owner, class_name: "Group", foreign_key: "owner_id"
 
     def generate_jwt
         JWT.encode({ id: id,

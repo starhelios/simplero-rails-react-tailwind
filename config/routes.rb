@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
-    devise_for :users, controllers: { sessions: :sessions },
+    devise_for :users, controllers: { sessions: "api/sessions" },
                        path_names: { sign_in: :login }
+  end
+
+  namespace :api do
+    get '/groups', to: 'groups#index'
+    get '/groups/:uuid', to: 'groups#show'
+    post 'groups', to: 'groups#create'
+    put 'groups/:uuid', to: 'groups#update'
+    delete 'groups/:uuid', to: 'groups#destroy'
+
+    get '/users', to: 'users#index'
   end
 
   root 'homepage#index'

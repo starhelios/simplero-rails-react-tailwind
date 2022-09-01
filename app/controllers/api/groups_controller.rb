@@ -1,33 +1,42 @@
-class Api::V1::GroupsController < ApplicationController
+class Api::GroupsController < ApplicationController
     before_action :set_group, only: [:show, :update, :destroy]
 
     def index
-        groups = Group.paginate(page: params[:page], per_page: 15)
-        render json: { status: true, data: groups }
+
+        user = current_user
+        
+        groups = Group.left_outer_joins(:users)
+
+        type = params[:type]
+        if type == 'owner'
+            groups = groups.where(owner_id: user.id)
+        elsif type == 'member'
+            groups = user.groups
+        end
+
+        @groups = groups.where.not(access_level: 'secret').paginate(page: params[:page], per_page: 15)
     end
 
     def show
-        render json: { status: true, data: @group }
     end
 
     def create
-        group = Group.new(group_params)
-        if group.access_level == "secret"
-            group.invitation_link = SecureRandom.alphanumeric(32);
-        end
-        if group.save
-            render json: { status: true, message: 'Group created!', data: group }
-            
+        @group = Group.new(group_params)
+
+        @group.uuid = SecureRandom.uuid
+
+        if @group.save
+            render 'api/groups/show'
         else
-            render json: { status: false, message: 'Unable to create group', errors: group.errros.full_messages }
+            render json: { status: false, message: 'Unable to create group', errors: @group.errors.full_messages }
         end
     end
 
     def update
         if @group.update(group_params)
-            render json: { status: true, message: 'Group Updated!', data: @group }
+            render 'api/groups/show'
         else
-            render json: { status: false, message: 'Unable to update group', errors: @group.errros.full_messages }
+            render json: { status: false, message: 'Unable to update group', errors: @group.errors.full_messages }
         end
     end
 
@@ -67,7 +76,7 @@ class Api::V1::GroupsController < ApplicationController
     private 
 
     def set_group
-        @group = Group.find(params[:id])
+        @group = Group.find_by(uuid: params[:uuid])
     end
 
     def group_params
