@@ -8,6 +8,8 @@ module.exports = {
     './app/javascript/*.{js,jsx}',
     './app/views/**/*.{erb,haml,html,slim}',
     './app/views/**/**/*.{erb,haml,html,slim}',
+    './app/components/**/*.{erb,haml,html,slim}',
+    './app/components/*.{erb,haml,html,slim}',
   ],
   theme: {
     extend: {
@@ -17,6 +19,8 @@ module.exports = {
       colors: {
         'brand-primary': '#03070E',
         'brand-primary-hover': '#216CEA',
+        danger: '#FF0000',
+        success: '#00FF00',
       },
     },
   },

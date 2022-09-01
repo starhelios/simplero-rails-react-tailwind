@@ -4,9 +4,9 @@ class Group < ApplicationRecord
     validates :access_level, inclusion: { in: ["public", "private", "secret"]}
     validates :owner_id, presence: true
 
-    has_many :group_member, class_name: "GroupMember"
-    has_many :users, through: :group_member
-    has_many :joining_requests
+    has_many :group_members, class_name: "GroupMember"
+    has_many :users, through: :group_members
+    has_many :joining_requests, -> { where status: "pending"}
 
     belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 

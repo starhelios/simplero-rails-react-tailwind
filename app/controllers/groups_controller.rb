@@ -23,6 +23,7 @@ class GroupsController < ApplicationController
     end
 
     def show
+        @is_admin = current_user.id == @group.owner_id
     end
 
     def create
@@ -61,20 +62,20 @@ class GroupsController < ApplicationController
 
     def approve_or_reject_request
         request = JoiningRequest.find(params[:request_id]);
-        if params[:status] == true
-            GroupMember.new(group_id: request.group_id, user_id: request.user_id, joining_date: DateTime.now)
+        if to_boolean(params[:status]) == true
+            GroupMember.create(group_id: request.group_id, user_id: request.user_id, joining_date: DateTime.now)
             request.status = 'approved'
-            request.save
         else
             request.status = 'rejected'
         end
-        render json: { status: true, message: 'Request Updated!' }
+        request.save
+        redirect_back fallback_location: group_path(uuid: request.group.uuid)
     end
 
     def remove_member
         member = GroupMember.find(params[:membership_id]);
         member.destroy
-        render json: { status: true, message: 'Memeber Removed from group!' }
+        redirect_back fallback_location: group_path(uuid: member.group.uuid)
     end
 
     private 
@@ -86,5 +87,9 @@ class GroupsController < ApplicationController
     def group_params
         params.permit(:name, :access_level)
     end
+
+    def to_boolean(str)
+        str.downcase == 'true'
+      end
 
 end

@@ -1,0 +1,80 @@
+<div class='container mx-auto mt-6'>
+  <div class='inline-block w-2/3 align-top'>
+    <h1 class='text-3xl mb-8'><%= @group.name %> <i class="fa-solid fa-gear ml-5"></i></h1>
+    <h1 class='text-3xl mb-8'>All Posts </h1>
+    <div class='mb-8'>
+      <h2 class='text-xl mb-8'>I went to a supermarket</h2>
+      <p class='text-sm mb-8'>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+        has been the industry's standard dummy text ever since the 1500s, when an unknown
+        printer took a galley of type and scrambled it to make a type specimen book...
+      </p>
+      <div class='text-sm text-gray-400'>
+        <div class='mb-4'>
+          <span>Last Comment 3 days ago</span>
+          <span class='mx-3'>|</span>
+          <span>Edit</span>
+          <span class='mx-3'>|</span>
+          <span>Delete</span>
+          <span class='mx-3'>|</span>
+          <span>Created By You</span>
+        </div>
+        <div>View Post</div>
+      </div>
+    </div>
+    <div class='mb-8'>
+      <h2 class='text-xl mb-8'>Finally completed the last challenge</h2>
+      <p class='text-sm mb-8'>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+        has been the industry's standard dummy text ever since the 1500s, when an unknown
+        printer took a galley of type and scrambled it to make a type specimen book...
+      </p>
+      <div class='text-sm text-gray-400'>
+        <div class='mb-4'>
+          <span>Last Comment 3 days ago</span>
+          <span class='mx-3'>|</span>
+          <span>Edit</span>
+          <span class='mx-3'>|</span>
+          <span>Delete</span>
+          <span class='mx-3'>|</span>
+          <span>Created By You</span>
+        </div>
+        <div>View Post</div>
+      </div>
+    </div>
+  </div>
+  <div class='inline-block w-1/4 align-top'>
+    <div class='ml-9'>
+      <div class='mb-4'>
+        <% if @group.group_members.any? %>
+          <h2 class='text-xl mb-4'>Members</h2>
+          <div class='text-sm'>
+            <% @group.group_members.each do |member|%>
+              <div class="flex justify-between mb-4">
+                <p><%= member.user.name %></p>
+                <%= button_to "<i class='fa-solid fa-xmark fa-2x text-danger'></i>".html_safe, 
+                      remove_member_path(membership_id: member.id, status: false), :title=> "Remove" if @is_admin %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class='mb-4'>
+        <% if @is_admin && @group.joining_requests.any? %>
+          <h2 class='text-xl mb-4 text-2xl'>Requests</h2>
+          <div class='text-sm'>
+            <% @group.joining_requests.each do |request|%>
+              <div class="flex justify-between mb-4">
+                <p class="text-lg w-36"><%= request.user.name %></p>
+                <%= button_to "<i class='fa-solid fa-check fa-2x text-success'></i>".html_safe,  
+                    update_request_path(request_id: request.id, status: true),  :title=> "Approve" %>
+                <%= button_to "<i class='fa-solid fa-xmark fa-2x text-danger'></i>".html_safe, 
+                    update_request_path(request_id: request.id, status: false), :title=> "Reject" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
