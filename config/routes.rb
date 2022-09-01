@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-
-  namespace :api do
-    namespace :v1 do
-      post :login, to: 'sessions#login'
-    end
+  scope :api, defaults: { format: :json } do
+    devise_for :users, controllers: { sessions: :sessions },
+                       path_names: { sign_in: :login }
   end
 
   root 'homepage#index'
