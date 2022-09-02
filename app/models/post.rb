@@ -8,6 +8,6 @@ class Post < ApplicationRecord
   belongs_to :user, foreign_key: "author_id"
   belongs_to :group
 
-  has_many :comments
+  has_many :comments, -> { where reply_to: nil}
 
 end

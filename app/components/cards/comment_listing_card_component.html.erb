@@ -12,3 +12,10 @@
     <span><%= link_to 'Reply', '#', class: "hover:text-brand-primary-hover" %></span>
   </div>
 </div>
+<% if @comment.replies.present? %>
+  <div class='text-sm text-gray-400 ml-5 mb-4 border-l-4 pl-3'>
+    <% @comment.replies.each do |reply| %>
+      <%= render(Cards::CommentListingCardComponent.new(comment: reply, current_user: @current_user)) %>
+    <% end %>
+  </div>
+<% end %>

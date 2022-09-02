@@ -5,6 +5,7 @@
       <%= @post.description %>
     </p>
     <h1 class='text-2xl mb-3'>Comments </h1>
+    <%= render(Input::CommentInputComponent.new(comment: Comment.new, post_id: @post.id, user_id: @post.user.id)) %>
     <% if @post.comments.present? %>
       <% @post.comments.each do |comment|%>
         <%= render(Cards::CommentListingCardComponent.new(comment: comment, current_user: @current_user)) %>
