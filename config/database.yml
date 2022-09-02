@@ -12,18 +12,18 @@ default: &default
 development:
   <<: *default
   host: <%= ENV["DATABASE_HOST"] || 'localhost' %>
-  username: 'postgres'
-  password: 'password'
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   port: <%= ENV["DATABASE_PORT"] || 5432 %>
-  database:  'rails_react_assessment'  #<%= ENV["DATABASE_NAME"] || 'rails-react-assessment' %>
+  database: <%= ENV["DATABASE_NAME"] || 'rails-react-assessment' %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: 'rails_react_assessment-test' # <%= ENV["DATABASE_NAME_TEST"] || 'rails-react-assessment-test' %>
+  database: <%= ENV["DATABASE_NAME_TEST"] || 'rails-react-assessment-test' %>
 
 production:
   <<: *default
-  database:  <%= ENV["DATABASE_NAME"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
