@@ -5,5 +5,4 @@ class Buttons::PrimaryButtonComponent < ViewComponent::Base
     @classes = classes
     @type = type
   end
-
 end

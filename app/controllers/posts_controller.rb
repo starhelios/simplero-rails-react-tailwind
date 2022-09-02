@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   def show
+    @is_admin = @post.group.owner_id === @current_user.id
   end
 
   def edit
@@ -28,8 +29,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+      group_uuid = @post.group.uuid;
       @post.destroy
-      render json: { status: true, message: 'Post Deleted!' }
+      redirect_to group_path(group_uuid)
   end
 
   private 

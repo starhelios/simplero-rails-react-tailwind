@@ -22,7 +22,7 @@
       <% end %>
     </div>
     <div>
-      <%= render(Buttons::ActionButtonComponent.new(title: @btn_text, disabled: @is_member || @is_requested, action_url: join_group_path(group_id: @group.id, user_id: @current_user.id))) if !@is_owner %>
+      <%= render(Buttons::ActionButtonComponent.new(title: @btn_text, method: "POST", disabled: @is_member || @is_requested, action_url: join_group_path(group_id: @group.id, user_id: @current_user.id))) if !@is_owner %>
     </div>
   </div>
 </div>

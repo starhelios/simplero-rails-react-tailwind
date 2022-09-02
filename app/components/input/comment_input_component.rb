@@ -9,5 +9,4 @@ class Input::CommentInputComponent < ViewComponent::Base
     @toggle = toggle
     @editor = editor
   end
-
 end

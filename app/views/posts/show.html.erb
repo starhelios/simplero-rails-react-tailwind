@@ -6,10 +6,10 @@
       <%= sanitize @post.description %>
     </p>
     <h1 class='text-2xl mb-3'>Comments </h1>
-    <%= render(Input::CommentInputComponent.new(comment: Comment.new, post_id: @post.id, user_id: @post.user.id, toggle: false)) %>
+    <%= render(Input::CommentInputComponent.new(comment: Comment.new, post_id: @post.id, user_id: @current_user.id, toggle: false)) %>
     <% if @post.comments.present? %>
       <% @post.comments.each do |comment|%>
-        <%= render(Cards::CommentListingCardComponent.new(comment: comment, current_user: @current_user)) %>
+        <%= render(Cards::CommentListingCardComponent.new(comment: comment, current_user: @current_user, is_group_admin: @is_admin)) %>
       <% end %>
     <% else %>
       <h3 class="text-center bg-gray-100 p-5">Wow :) Such an empty! </h3>

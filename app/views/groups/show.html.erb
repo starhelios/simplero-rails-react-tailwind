@@ -5,14 +5,22 @@
       <h1 class='text-3xl mb-8 mt-2'><%= @group.name %> <% if @is_admin %> <i class="fa-solid fa-gear ml-5" data-action="click->modal#toggle"><% end %></i></h1>
       <%= render(Modals::GroupModalComponent.new(edit: true, group: @group, hanlde_submit: nil, on_hide: "click->modal#toggle")) if @is_admin %>
     </div>
+    <% if @is_admin %>
+      <div data-controller="invitation" >
+        <input data-invitation-target="inviteLink" value="<%= request.original_url %>" hidden/>
+        <p 
+        data-action="click->invitation#copyLink" 
+          class="mb-4 invitation-link">Copy Invitation Link <small data-invitation-target="linkMsg"></small></p>
+      </div>
+    <% end %>
     <%= render 'posts/form' %>
     <h1 class='text-3xl mb-8'>All Posts </h1>
     <% if @group.posts.present? %>
       <% @group.posts.each do |post|%>
-        <%= render(Cards::PostListingCardComponent.new(post: post, current_user: @current_user)) %>
+        <%= render(Cards::PostListingCardComponent.new(post: post, current_user: @current_user, is_group_admin: @is_admin)) %>
       <% end %>
     <% else %>
-      <h3 class="text-center bg-gray-100 p-5">Wao :) Such an empty! </h3>
+      <h3 class="text-center bg-gray-100 p-5 mb-2">Wao :) Such an empty! </h3>
     <% end %>
   </div>
   <div class='inline-block w-1/4 align-top'>

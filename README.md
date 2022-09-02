@@ -1,34 +1,39 @@
-# README
+# Take Home Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
+Take home is a simple lightweight community platform that allows people to create & join “Groups”. A group can either be
+Public(Anyone can join), Private(People can request to join, but they have to be accepted by the creator). Users can join multiple groups and create posts on groups they’re a member of, Other members can join the discussion by commenting on a post and reply to comments. The creator of group can modify or delete groups, posts and comments. He can also remove members that currently have access to group.
 
-- Ruby version
-  Make sure you have ruby-3.1.0 installed. Or use rvm to configure it.
+## Technologies Used
 
-- Yarn version
-  1.22.19
+- Rails 7
+- Stimulus
+- React
+- Tailwind CSS
+- ViewComponent
+- FontAwesome
+- ActionCable/WebSockets
 
-- System dependencies
+## Instalation Guidelines
 
-- Configuration
+Please follow the steps to setup project locally:
 
-- Database creation
-  copy .env.example to .env
-  update the DB connection variables.
+- Make sure you have ruby-3.1.0 installed. Or use rvm to configure it.
 
-- How to run the test suite
+- Take pull from repo https://github.com/starhelios/rails-react-test-assessment.git
 
-- Services (job queues, cache servers, search engines, etc.)
+- Copy .env.example to .env
+  update the DB connection and email smtp variables.
 
-- Deployment instructions
-
-- Run Locally
+- Run Following commands
 
 ```
 bundle install
-yarn
+rails db:create
+rails db:migrate
+rails db:seed #optional - to create set of dummy users
 ./bin/dev
 ```
+
+- Now application can be accessed at http://localhost:3000

@@ -7,5 +7,4 @@ class Tabs::SimpleTabsComponent < ViewComponent::Base
     @on_change = on_change
     @keys = keys
   end
-
 end

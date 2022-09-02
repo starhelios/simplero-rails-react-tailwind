@@ -7,5 +7,4 @@ class Modals::GroupModalComponent < ViewComponent::Base
     @hanlde_submit = hanlde_submit
     @on_hide = on_hide
   end
-
 end

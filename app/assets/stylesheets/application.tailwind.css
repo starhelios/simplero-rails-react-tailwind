@@ -15,3 +15,38 @@
 .trix-content {
   min-height: 300px;
 }
+
+.comment-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.tox-statusbar__text-container {
+  display: none !important;
+}
+
+.tox-editor-header {
+  border: none !important;
+}
+
+.emoji-icon {
+  cursor: pointer;
+}
+
+.invitation-link {
+  color: blue;
+  cursor: pointer;
+}
+
+.invitation-link small {
+  color: gray;
+}
+
+.accept-invitation {
+  margin-top: 60px;
+  background: aliceblue;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

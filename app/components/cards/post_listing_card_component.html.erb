@@ -9,7 +9,7 @@
         <span>Last Comment <%= time_ago_in_words @post.last_comment_time %> ago</span>
         <span class='mx-3'>|</span>
       <% end %>
-      <% if @is_author %>
+      <% if @is_author || @is_group_admin %>
         <span><%= link_to 'Edit', edit_post_path(@post), class: "hover:text-brand-primary-hover" %></span>
         <span class='mx-3'>|</span>
         <span><%= button_to 'Delete', post_path(@post.id) , method: :delete, :onclick => "return confirm('Are you sure you want to delete this post?')", form_class: "inline text-red-400" %></span>

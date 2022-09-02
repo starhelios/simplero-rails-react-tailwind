@@ -9,15 +9,17 @@ class GroupsController < ApplicationController
             groups = groups.where(owner_id: current_user.id)
         elsif type == 'member'
             groups = current_user.groups
+        else
+            groups = groups.distinct.all_groups(current_user.id)
         end
-        @groups = groups.where.not(access_level: 'secret').paginate(page: params[:page], per_page: 15)
+        @groups = groups.paginate(page: params[:page], per_page: 15)
     end
 
     def show
         @is_admin = current_user.id == @group.owner_id
         @is_member = @is_admin || GroupMember.find_by(user_id: current_user.id, group_id: @group.id) ? true : false
         if !@is_member
-            redirect_to groups_path, flash:{errors: ['You need to join the group'], title: 'Access Denied'}
+            render 'join_group'
         end
         @post = Post.new
     end

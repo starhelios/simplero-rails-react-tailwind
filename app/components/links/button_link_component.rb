@@ -5,5 +5,4 @@ class Links::ButtonLinkComponent < ViewComponent::Base
     @text = text
     @link = link
   end
-
 end
