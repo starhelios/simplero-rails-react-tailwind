@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'group/:uuid', to: 'groups#show', as: 'group'
   resources :posts
   resources :comments
+  resources :images, only: [:create]
 end

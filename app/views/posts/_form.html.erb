@@ -2,7 +2,7 @@
   <% if flash[:errors] %>
     <%= render 'shared/errors', errors: flash[:errors] %>
   <% end %>
-  <%= form_with(model: @post, class: "shadow p-3 mb-3 bg-info rounded", local: true,  data: { turbo: false}) do |f| %>
+  <%= form_with(model: @post, class: "shadow p-3 mb-3 bg-info rounded", local: true,  data: { controller: "post", post_csrf: form_authenticity_token, turbo: false}) do |f| %>
     <div class="form-group row mb-4">
       <%= f.label :title, class: "col-2 col-form-label text-light" %><br/>
       <div class="col-10">
@@ -12,7 +12,8 @@
     <div class="form-group row mb-4">
       <%= f.label :description, class: "col-2 col-form-label text-light" %><br/>
       <div class="col-10">
-        <%= f.text_area :description, :required => true, rows: 10, class: "py-2 px-3 border border-gray-300 focus:border-brand-primary focus:outline-none focus:ring focus:ring-brand-primary focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full", placeholder: "Description of article here..." %>
+        <%= f.hidden_field :description, id: "x", value: @post.description, :required => true, class: "py-2 px-3 border border-gray-300 focus:border-brand-primary focus:outline-none focus:ring focus:ring-brand-primary focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full", placeholder: "Description of post here..." %>
+        <trix-editor input="x" class="trix-content"></trix-editor>
       </div>
     </div>
     <%= f.hidden_field :author_id, value: @current_user.id %>

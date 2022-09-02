@@ -10,4 +10,8 @@ class Post < ApplicationRecord
 
   has_many :comments, -> { where reply_to: nil}
 
+  def update_last_comment_time
+    self.update_column(:last_comment_time, DateTime.now)
+  end
+
 end

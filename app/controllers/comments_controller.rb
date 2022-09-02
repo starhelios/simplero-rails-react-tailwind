@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(comment_params)
+    @comment.post.update_last_comment_time
     redirect_to post_path(@comment.post_id)
   end
 

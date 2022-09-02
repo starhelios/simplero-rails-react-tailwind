@@ -1,4 +1,4 @@
-<%= form_with(model: @comment, local: true,  data: { turbo: false}) do |f| %>
+<%= form_with(model: @comment, local: true, class: "#{@toggle ? 'hidden dynamic-comment' : ''} mt-1",  data: { turbo: false, comment_target: "#{@editor ? 'editor' : 'wrapper'}" }) do |f| %>
   <div class="mb-4">
     <%= f.text_field :description, :required => true, class: "mb-3 w-2/3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Add Comment ..." %>
     <%= f.hidden_field :post_id, value: @post_id %>
