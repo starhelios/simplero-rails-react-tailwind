@@ -11,7 +11,6 @@ class GroupsController < ApplicationController
             groups = current_user.groups
         end
         @groups = groups.where.not(access_level: 'secret').paginate(page: params[:page], per_page: 15)
-        
     end
 
     def show
@@ -20,6 +19,7 @@ class GroupsController < ApplicationController
         if !@is_member
             redirect_to groups_path, flash:{errors: ['You need to join the group'], title: 'Access Denied'}
         end
+        @post = Post.new
     end
 
     def create

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post 'remove_member', to: 'groups#remove_member'
   get 'group/:uuid', to: 'groups#show', as: 'group'
   resources :posts
+  resources :comments
 end

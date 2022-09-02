@@ -1,24 +1,29 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
-
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  
   def show
+  end
+
+  def edit
+    @group = @post.group
   end
 
   def create
       @post = Post.new(post_params)
-
+      group = Group.find(post_params[:group_id])
       if @post.save
-          render 'api/posts/show'
+        group.update_last_activity
+        redirect_to post_path(@post)
       else
-          render json: { status: false, message: 'Unable to create post', errors: @post.errors.full_messages }
+        redirect_back fallback_location: group_path(group.id), flash:{errors: @post.errors.full_messages}
       end
   end
 
   def update
       if @post.update(post_params)
-          render 'api/posts/show'
+        redirect_to post_path(@post)
       else
-          render json: { status: false, message: 'Unable to update post', errors: @post.errors.full_messages }
+        redirect_back fallback_location: edit_post_path(@post), flash:{errors: @post.errors.full_messages}
       end
   end
 

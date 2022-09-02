@@ -21,6 +21,7 @@ module.exports = {
         'brand-primary-hover': '#216CEA',
         danger: '#FF0000',
         success: '#00FF00',
+        black: '#000',
       },
     },
   },
