@@ -4,6 +4,7 @@
       <h1 class='text-3xl mb-8'><%= @group.name %> <% if @is_admin %> <i class="fa-solid fa-gear ml-5" data-action="click->modal#toggle"><% end %></i></h1>
       <%= render(Modals::GroupModalComponent.new(edit: true, group: @group, hanlde_submit: nil, on_hide: "click->modal#toggle")) if @is_admin %>
     </div>
+    <%= render 'posts/form' %>
     <h1 class='text-3xl mb-8'>All Posts </h1>
     <div class='mb-8'>
       <h2 class='text-xl mb-8'>I went to a supermarket</h2>

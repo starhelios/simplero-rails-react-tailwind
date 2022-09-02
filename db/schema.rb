@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_14_101601) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_24_083923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_101601) do
     t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_activity"
   end
 
   create_table "joining_requests", force: :cascade do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_101601) do
     t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_comment_time"
   end
 
   create_table "users", force: :cascade do |t|

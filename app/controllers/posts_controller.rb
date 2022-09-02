@@ -1,4 +1,4 @@
-class Api::PostsController < ApplicationController
+class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
 
   def show

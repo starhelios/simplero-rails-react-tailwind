@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   post 'update_request', to: 'groups#approve_or_reject_request'
   post 'remove_member', to: 'groups#remove_member'
   get 'group/:uuid', to: 'groups#show', as: 'group'
+  resources :posts
 end
