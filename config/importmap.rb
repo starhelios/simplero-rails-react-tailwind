@@ -14,3 +14,4 @@ pin "@emoji-mart/data", to: "https://ga.jspm.io/npm:@emoji-mart/data@1.0.5/sets/
 pin "@emoji-mart/react", to: "https://ga.jspm.io/npm:@emoji-mart/react@1.0.1/dist/module.js"
 pin "emoji-mart", to: "https://ga.jspm.io/npm:emoji-mart@5.2.1/dist/module.js"
 pin "application", preload: true
+pin "tinymce", to: "https://ga.jspm.io/npm:tinymce@6.1.2/tinymce.js"

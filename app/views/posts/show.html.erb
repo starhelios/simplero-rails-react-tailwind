@@ -16,3 +16,19 @@
     <% end %>
   </div>
 </div>
+
+<script>
+(function()
+    {
+      if( window.localStorage )
+      {
+        if( !localStorage.getItem('commentLoad') )
+        {
+          localStorage['commentLoad'] = true;
+          window.location.reload();
+        }  
+        else
+          localStorage.removeItem('commentLoad');
+      }
+    })();
+</script>

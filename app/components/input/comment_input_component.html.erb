@@ -1,6 +1,6 @@
 <%= form_with(model: @comment, local: true, class: "#{@toggle ? 'hidden dynamic-comment' : ''} mt-1",  data: { turbo: false, comment_target: "#{@editor ? 'editor' : 'wrapper'}" }) do |f| %>
   <div class="mb-4">
-    <%= f.hidden_field :description, id: "emoji-i", :required => true, class: "mb-3 w-2/3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Add Comment ..." %>
+    <%= f.hidden_field :description, id: "emoji-i", :required => true, data: {controller: "tiny-mice", "tiny-mice-target": "tinymce"}, class: "mb-3 w-2/3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Add Comment ..." %>
     <%= f.hidden_field :post_id, value: @post_id %>
     <%= f.hidden_field :user_id, value: @user_id %>
     <%= f.hidden_field :reply_to, value: @reply_to %>
@@ -9,13 +9,4 @@
     </div>
   </div>
 <% end %>
-<script>
-  tinymce.init({
-    selector: "#emoji-i",
-    plugins: "emoticons",
-    toolbar: "emoticons",
-    toolbar_location: "bottom",
-    menubar: false,
-    height: "140px",
-  });
-</script>
+
