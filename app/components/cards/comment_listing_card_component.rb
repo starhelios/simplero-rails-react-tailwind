@@ -7,5 +7,4 @@ class Cards::CommentListingCardComponent < ViewComponent::Base
     @is_author = comment.user_id == current_user.id
     @is_group_admin = is_group_admin
   end
-
 end

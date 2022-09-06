@@ -7,14 +7,15 @@
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-
-development:
-  <<: *default
   host: <%= ENV["DATABASE_HOST"] || 'localhost' %>
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
   port: <%= ENV["DATABASE_PORT"] || 5432 %>
+  timeout: 5000
+  url: <%= ENV["DATABASE_URL"] %>
+
+development:
+  <<: *default
   database: <%= ENV["DATABASE_NAME"] || 'rails-react-assessment' %>
 
 # Warning: The database defined as "test" will be erased and
@@ -26,4 +27,3 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV["DATABASE_NAME"] %>

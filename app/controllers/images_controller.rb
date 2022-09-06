@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
     @image = Image.new(image_params)
     respond_to do |format|
       if @image.save
-        format.json { render json: { url: @image.image_url }, status: :ok }
+        format.json { render json: {url: @image.image_url}, status: :ok }
       else
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end

@@ -2,7 +2,7 @@
   <div class='inline-block w-2/3 align-top'>
     <div data-controller="modal">
       <%= link_to "<i class='fa-solid fa-arrow-left-long fa-2x'></i>".html_safe, groups_path, title: "Back to Groups" %>
-      <h1 class='text-3xl mb-8 mt-2'><%= @group.name %> <% if @is_admin %> <i class="fa-solid fa-gear ml-5" data-action="click->modal#toggle"><% end %></i></h1>
+      <h1 class='text-3xl mb-8 mt-2'><%= @group.name %> <% if @is_admin %> <i class="fa-solid fa-gear ml-5 cursor-pointer" data-action="click->modal#toggle"><% end %></i></h1>
       <%= render(Modals::GroupModalComponent.new(edit: true, group: @group, hanlde_submit: nil, on_hide: "click->modal#toggle")) if @is_admin %>
     </div>
     <% if @is_admin %>

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
   end
+
   def new
     @user = User.new
   end
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to home_page
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -25,15 +26,15 @@ class UsersController < ApplicationController
   end
 
   def update
-      if @user.update(user_params)
-        redirect_to profile
-      else
-        render 'edit'
-      end
+    if @user.update(user_params)
+      redirect_to profile
+    else
+      render "edit"
+    end
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :password)
   end

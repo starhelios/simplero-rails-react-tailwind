@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div class='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-                  <%= render(Buttons::PrimaryButtonComponent.new(title: @edit ? 'Update' : 'Save', classes: "w-52 ml-5", type: "submit")) %>
+                  <%= render(Buttons::PrimaryButtonComponent.new(title: @edit ? 'Update' : 'Save', classes: "w-52 ml-5 rounded", type: "submit")) %>
                   <%= render(Buttons::OutlineButtonComponent.new(title: 'Cancel', action: @on_hide)) %>
                 </div>
               <% end %>

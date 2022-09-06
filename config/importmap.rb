@@ -4,7 +4,8 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "@rails/actioncable", to: "actioncable.esm.js"   
+pin_all_from "app/javascript/channels", under: "channels"
+pin "@rails/actioncable", to: "actioncable.esm.js"
 pin "jquery", to: "https://code.jquery.com/jquery-3.6.0.min.js"
 
 pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.26/nodelibs/browser/process-production.js"

@@ -1,0 +1,59 @@
+version: '3.9'
+name: 'simplero-rails-react-tailwind'
+services:
+  postgres:
+    image: 'postgres:13.6-alpine'
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5431:5432'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+    healthcheck:
+      test:
+        - 'CMD-SHELL'
+        - 'pg_isready -U postgres'
+
+  redis:
+    image: 'redis:6.2-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+    healthcheck:
+      test:
+        - 'CMD-SHELL'
+        - 'redis-cli ping'
+  app:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    build:
+      context: .
+      args:
+        SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    command: [ 'foreman', 'start', '-f', 'Procfile.dev' ]
+    stdin_open: true
+    tty: true
+    environment:
+      - PORT=80
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost/health_check" ]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 5s
+    env_file:
+      - .env
+    ports:
+      - '3000:80'
+    volumes:
+      - '.:/app'
+      - '/app/public/js'
+      - '/app/tmp'
+
+volumes:
+  redis:
+  postgres:
+  fa_config:

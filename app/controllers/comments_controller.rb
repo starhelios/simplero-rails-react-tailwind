@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
   before_action :authenticate_user!
 
-
   def show
   end
 
@@ -22,14 +21,13 @@ class CommentsController < ApplicationController
     redirect_to post_path(@comment.post)
   end
 
-  private 
+  private
 
   def set_comment
-      @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def comment_params
-      params.require(:comment).permit(:description, :attachment_path, :user_id, :post_id, :reply_to)
+    params.require(:comment).permit(:description, :attachment_path, :user_id, :post_id, :reply_to)
   end
-
 end

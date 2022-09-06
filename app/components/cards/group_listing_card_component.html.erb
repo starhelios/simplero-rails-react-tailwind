@@ -2,9 +2,9 @@
   <div class='flex justify-between mb-8'>
     <div>
       <div>
-        <h2 class='inline-block mb-8 text-2xl hover:text-brand-primary-hover'>
+        <h2 class='inline-block mb-8 text-2xl'>
           <%if @is_member || @is_owner %>
-            <%= link_to @group.name, group_path(@group.uuid) %>
+            <%= link_to @group.name, group_path(@group.uuid), class: 'hover:text-brand-primary-hover' %>
           <% else %>
             <%= @group.name %>
           <% end %>

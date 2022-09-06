@@ -9,7 +9,6 @@ class CreatePost < ActiveRecord::Migration[7.0]
       t.timestamps
       t.foreign_key :users, column: :author_id
       t.foreign_key :groups, column: :group_id
-
     end
   end
 end

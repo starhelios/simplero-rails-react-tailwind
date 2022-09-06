@@ -8,7 +8,6 @@ class CreateGroups < ActiveRecord::Migration[7.0]
       t.datetime :last_activity
       t.timestamps
       t.foreign_key :users, column: :owner_id
-
     end
   end
 end

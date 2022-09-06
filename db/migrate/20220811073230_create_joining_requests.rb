@@ -9,7 +9,6 @@ class CreateJoiningRequests < ActiveRecord::Migration[7.0]
 
       t.foreign_key :users, column: :user_id
       t.foreign_key :groups, column: :group_id
-
     end
   end
 end

@@ -5,7 +5,7 @@
     <%= f.hidden_field :user_id, value: @user_id %>
     <%= f.hidden_field :reply_to, value: @reply_to %>
     <div class='sm:flex sm:flex-row-reverse mb-4 w-2/3 comment-btn'>
-      <%= f.submit 'Submit', class: "inline-flex items-center justify-center px-4 py-2 bg-brand-primary font-semibold capitalize text-white hover:bg-brand-primary-hover active:bg-brand-primary disabled:opacity-25 transition" %>
+      <%= f.submit 'Submit', class: "inline-flex items-center justify-center px-4 py-2 bg-brand-primary font-semibold capitalize text-white hover:bg-brand-primary-hover cursor-pointer rounded active:bg-brand-primary disabled:opacity-25 transition" %>
     </div>
   </div>
 <% end %>

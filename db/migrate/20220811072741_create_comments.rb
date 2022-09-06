@@ -10,7 +10,6 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.timestamps
       t.foreign_key :users, column: :user_id
       t.foreign_key :posts, column: :post_id
-
     end
   end
 end

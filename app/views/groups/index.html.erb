@@ -6,7 +6,7 @@
   <div class='flex justify-between'>
     <%= render(Tabs::SimpleTabsComponent.new(tabs: ["All Groups", "Created by me", "Where I am member"], keys: ['all', 'owner', 'member'], active_key: params[:type] || 'all', on_change: groups_path))%>
     <div data-controller="modal">
-      <%= render(Buttons::PrimaryButtonComponent.new(title: "Create a new group", action: "click->modal#toggle")) %>
+      <%= render(Buttons::PrimaryButtonComponent.new(title: "Create a new group", action: "click->modal#toggle", classes: 'w-52 rounded')) %>
       <%= render(Modals::GroupModalComponent.new(edit: false, group: Group.new, hanlde_submit: nil, on_hide: "click->modal#toggle"))%>
     </div>
   </div>

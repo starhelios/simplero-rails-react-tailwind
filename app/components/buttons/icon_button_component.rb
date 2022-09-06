@@ -6,5 +6,4 @@ class Buttons::IconButtonComponent < ViewComponent::Base
     @icon = icon
     @action_url = action_url
   end
-
 end

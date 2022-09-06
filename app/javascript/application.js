@@ -8,5 +8,5 @@ window.$ = $
 import '@hotwired/turbo-rails'
 import 'controllers'
 import '@rails/actioncable'
-import './controllers'
-import './channels/notification_channel'
+// import './controllers'
+import 'channels/notification_channel'

@@ -7,5 +7,4 @@ class Cards::PostListingCardComponent < ViewComponent::Base
     @is_author = post.author_id == @current_user.id
     @is_group_admin = is_group_admin
   end
-
 end

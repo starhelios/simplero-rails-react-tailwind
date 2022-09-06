@@ -1,1 +1,2 @@
-<%= button_to @title, @action_url, :disabled => @disabled, method: @method, class: "rounded border-2 border-black #{!@disabled ? 'hover:border-brand-primary-hover' : ''} rounded w-52 text-center inline-block py-2 #{!@disabled ? 'hover:text-brand-primary-hover' : ''}" %>
+<%= button_to @title, @action_url, :disabled => @disabled, method: @method, class: "border-2 border-black #{!@disabled ? 'hover:border-brand-primary-hover' : ''} rounded w-52 text-center inline-block py-2  #{!@disabled ? 'hover:text-brand-primary-hover' : ''} #{@classes}" %>
+

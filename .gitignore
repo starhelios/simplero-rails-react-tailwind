@@ -46,3 +46,6 @@ yarn-debug.log*
 !/app/assets/builds/.keep
 .env
 .byebug_history
+config/credentials.yml.enc
+/public/js
+/public/manifest*
